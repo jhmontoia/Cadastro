@@ -1,0 +1,16 @@
+program Produto;
+
+uses
+  Vcl.Forms,
+  formPrincipal in 'Units\formPrincipal.pas' {Form1},
+  uDmProduto in 'DataModule\uDmProduto.pas' {dmProduto: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TdmProduto, dmProduto);
+  Application.Run;
+end.

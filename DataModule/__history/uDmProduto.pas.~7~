@@ -1,0 +1,57 @@
+unit uDmProduto;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, IBX.IBCustomDataSet, IBX.IBUpdateSQL,
+  IBX.IBDatabase, Data.DB, IBX.IBQuery, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.SqlExpr, FireDAC.Comp.Client;
+
+type
+  TdmProduto = class(TDataModule)
+    cnProduto: TFDConnection;
+    SQLConnection1: TSQLConnection;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+    procedure Conecta;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  dmProduto: TdmProduto;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TdmProduto }
+
+procedure TdmProduto.Conecta;
+begin
+   cnProduto.Connected := False;
+   with cnProduto.Params do
+      begin
+         add('DriverID=FB');
+         add('Database=C:\fb\ADDEMO_FB21.FDB');
+         add('User_Name=sysdba');
+         add('Password=masterkey');
+         add('CharacterSet=win1251');
+      end;
+
+   cnProduto.Open;
+end;
+
+procedure TdmProduto.DataModuleCreate(Sender: TObject);
+begin
+   Conecta;
+
+end;
+
+end.
